@@ -1,0 +1,87 @@
+Info direto do Bigquery a partir do compatilhamento para o Colab
+
+# @title Setup
+from google.colab import auth
+from google.cloud import bigquery
+from google.colab import data_table
+
+project = 'techchallengemodulo3' # Project ID inserted based on the query results selected to explore
+location = 'US' # Location inserted based on the query results selected to explore
+client = bigquery.Client(project=project, location=location)
+data_table.enable_dataframe_formatter()
+auth.authenticate_user()
+
+
+
+## Reference SQL syntax from the original job
+Use the ```jobs.query```
+[method](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to
+return the SQL syntax from the job. This can be copied from the output cell
+below to edit the query now or in the future. Alternatively, you can use
+[this link](https://console.cloud.google.com/bigquery?j=techchallengemodulo3:US:bquxjob_4a84ae03_18b835e3c5c)
+back to BigQuery to edit the query within the BigQuery user interface.
+
+# Running this code will display the query used to generate your previous job
+
+job = client.get_job('bquxjob_4a84ae03_18b835e3c5c') # Job ID inserted based on the query results selected to explore
+print(job.query)
+
+# Result set loaded from BigQuery job as a DataFrame
+Query results are referenced from the Job ID ran from BigQuery and the query
+does not need to be re-run to explore results. The ```to_dataframe```
+[method](https://googleapis.dev/python/bigquery/latest/generated/google.cloud.bigquery.job.QueryJob.html#google.cloud.bigquery.job.QueryJob.to_dataframe)
+downloads the results to a Pandas DataFrame by using the BigQuery Storage API.
+
+To edit query syntax, you can do so from the BigQuery SQL editor or in the
+```Optional:``` sections below.
+
+# Running this code will read results from your previous job
+
+job = client.get_job('bquxjob_4a84ae03_18b835e3c5c') # Job ID inserted based on the query results selected to explore
+results = job.to_dataframe()
+results
+
+## Show descriptive statistics using describe()
+Use the ```pandas DataFrame.describe()```
+[method](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html)
+to generate descriptive statistics. Descriptive statistics include those that
+summarize the central tendency, dispersion and shape of a dataset’s
+distribution, excluding ```NaN``` values. You may also use other Python methods
+to interact with your data.
+
+results.describe()
+
+Código efetivamente pós bigquery
+
+from google.colab import auth
+auth.authenticate_user()
+
+from google.cloud import bigquery
+import pandas as pd
+
+# Variáveis do projeto e da consulta
+project_id = "techchallengemodulo3"
+query = """
+SELECT UF, COUNT(*) AS TOTAL
+FROM `techchallengemodulo3.resolucao01.resolucao01tabela`
+GROUP BY UF
+"""
+
+# Criando cliente BigQuery e executando a consulta
+client = bigquery.Client(project=project_id)
+df = client.query(query).result().to_dataframe()
+
+
+import matplotlib.pyplot as plt
+
+# Ordenar o DataFrame para plotar os valores mais altos primeiro
+df = df.sort_values(by='TOTAL', ascending=False)
+
+# Crie o gráfico . Como criar o de mapa. Precisa redefinir a tabela.
+plt.figure(figsize=(12, 6))
+plt.bar(df['UF'], df['TOTAL'])
+plt.xlabel('UF')
+plt.ylabel('Total')
+plt.title('Total de Respondentes por UF')
+plt.xticks(rotation=90)
+plt.show()
