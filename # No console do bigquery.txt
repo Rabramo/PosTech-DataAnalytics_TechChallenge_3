@@ -1,0 +1,245 @@
+# No console do bigquery
+#Consultar o que está na tabela e garantir que existiu o merge das planilhas pelo KNIME
+
+SELECT *
+FROM  `techchallengemodulo3.resolucao01.resolucao01tabela`
+
+#todas as colunas com as variaveis e resultado do merge ok
+
+#depois selecionar as colunas escolhidas pelo grupo
+
+CREATE TABLE `techchallengemodulo3.resolucao01.resolucao01tabelalimpa` AS
+SELECT
+  UF,
+  CAPITAL,
+  V1012,
+  A002,
+  A003,
+  A005,
+  B0011,
+  B0012,
+  B0013,
+  B0014,
+  B0015,
+  B0018,
+  B0019,
+  B00111,
+  B002,
+  B0031,
+  B005,
+  B007,
+  C001,
+  C007D,
+  C007E,
+  C01011,
+  C012,
+  C013,
+  D0051,
+  FROM `techchallengemodulo3.resolucao01.resolucao01tabela`;
+
+# Alterar numero para Sim e não, para conseguir ver se teve Covid. Mais de 2 sim = COVID
+
+SELECT
+  CASE
+    WHEN A002 = 1 THEN 'Sim'
+    WHEN A002 = 2 THEN 'Não'
+    WHEN A002 = 3 THEN 'Não Sabe'
+    WHEN A002 = 9 THEN 'Ignorado'
+    ELSE CAST(A002 AS STRING)
+  END AS A002,
+  
+  CASE
+    WHEN A003 = 1 THEN 'Sim'
+    WHEN A003 = 2 THEN 'Não'
+    WHEN A003 = 3 THEN 'Não Sabe'
+    WHEN A003 = 9 THEN 'Ignorado'
+    ELSE CAST(A003 AS STRING)
+  END AS A003,
+  
+  CASE
+    WHEN A005 = 1 THEN 'Sim'
+    WHEN A005 = 2 THEN 'Não'
+    WHEN A005 = 3 THEN 'Não Sabe'
+    WHEN A005 = 9 THEN 'Ignorado'
+    ELSE CAST(A005 AS STRING)
+  END AS A005,
+  
+  CASE
+    WHEN B0011 = 1 THEN 'Sim'
+    WHEN B0011 = 2 THEN 'Não'
+    WHEN B0011 = 3 THEN 'Não Sabe'
+    WHEN B0011 = 9 THEN 'Ignorado'
+    ELSE CAST(B0011 AS STRING)
+  END AS B0011,
+  
+  CASE
+    WHEN B0012 = 1 THEN 'Sim'
+    WHEN B0012 = 2 THEN 'Não'
+    WHEN B0012 = 3 THEN 'Não Sabe'
+    WHEN B0012 = 9 THEN 'Ignorado'
+    ELSE CAST(B0012 AS STRING)
+  END AS B0012,
+  
+  CASE
+    WHEN B0013 = 1 THEN 'Sim'
+    WHEN B0013 = 2 THEN 'Não'
+    WHEN B0013 = 3 THEN 'Não Sabe'
+    WHEN B0013 = 9 THEN 'Ignorado'
+    ELSE CAST(B0013 AS STRING)
+  END AS B0013,
+  
+  CASE
+    WHEN B0014 = 1 THEN 'Sim'
+    WHEN B0014 = 2 THEN 'Não'
+    WHEN B0014 = 3 THEN 'Não Sabe'
+    WHEN B0014 = 9 THEN 'Ignorado'
+    ELSE CAST(B0014 AS STRING)
+  END AS B0014,
+  
+  CASE
+    WHEN B0015 = 1 THEN 'Sim'
+    WHEN B0015 = 2 THEN 'Não'
+    WHEN B0015 = 3 THEN 'Não Sabe'
+    WHEN B0015 = 9 THEN 'Ignorado'
+    ELSE CAST(B0015 AS STRING)
+  END AS B0015,
+  
+  CASE
+    WHEN B0018 = 1 THEN 'Sim'
+    WHEN B0018 = 2 THEN 'Não'
+    WHEN B0018 = 3 THEN 'Não Sabe'
+    WHEN B0018 = 9 THEN 'Ignorado'
+    ELSE CAST(B0018 AS STRING)
+  END AS B0018,
+  
+  CASE
+    WHEN B0019 = 1 THEN 'Sim'
+    WHEN B0019 = 2 THEN 'Não'
+    WHEN B0019 = 3 THEN 'Não Sabe'
+    WHEN B0019 = 9 THEN 'Ignorado'
+    ELSE CAST(B0019 AS STRING)
+  END AS B0019,
+  
+  CASE
+    WHEN B00111 = 1 THEN 'Sim'
+    WHEN B00111 = 2 THEN 'Não'
+    WHEN B00111 = 3 THEN 'Não Sabe'
+    WHEN B00111 = 9 THEN 'Ignorado'
+    ELSE CAST(B00111 AS STRING)
+  END AS B00111,
+  
+  CASE
+    WHEN B002 = 1 THEN 'Sim'
+    WHEN B002 = 2 THEN 'Não'
+    WHEN B002 = 3 THEN 'Não Sabe'
+    WHEN B002 = 9 THEN 'Ignorado'
+    ELSE CAST(B002 AS STRING)
+  END AS B002,
+  
+  CASE
+    WHEN B0031 = 1 THEN 'Sim'
+    WHEN B0031 = 2 THEN 'Não'
+    WHEN B0031 = 3 THEN 'Não Sabe'
+    WHEN B0031 = 9 THEN 'Ignorado'
+    ELSE CAST(B0031 AS STRING)
+  END AS B0031,
+  
+  CASE
+    WHEN B005 = 1 THEN 'Sim'
+    WHEN B005 = 2 THEN 'Não'
+    WHEN B005 = 3 THEN 'Não Sabe'
+    WHEN B005 = 9 THEN 'Ignorado'
+    ELSE CAST(B005 AS STRING)
+  END AS B005,
+  
+  CASE
+    WHEN B007 = 1 THEN 'Sim'
+    WHEN B007 = 2 THEN 'Não'
+    WHEN B007 = 3 THEN 'Não Sabe'
+    WHEN B007 = 9 THEN 'Ignorado'
+    ELSE CAST(B007 AS STRING)
+  END AS B007,
+  
+  CASE
+    WHEN C001 = 1 THEN 'Sim'
+    WHEN C001 = 2 THEN 'Não'
+    WHEN C001 = 3 THEN 'Não Sabe'
+    WHEN C001 = 9 THEN 'Ignorado'
+    ELSE CAST(C001 AS STRING)
+  END AS C001,
+  
+  CASE
+    WHEN C007D = 1 THEN 'Sim'
+    WHEN C007D = 2 THEN 'Não'
+    WHEN C007D = 3 THEN 'Não Sabe'
+    WHEN C007D = 9 THEN 'Ignorado'
+    ELSE CAST(C007D AS STRING)
+  END AS C007D,
+  
+  CASE
+    WHEN C007E = 1 THEN 'Sim'
+    WHEN C007E = 2 THEN 'Não'
+    WHEN C007E = 3 THEN 'Não Sabe'
+    WHEN C007E = 9 THEN 'Ignorado'
+    ELSE CAST(C007E AS STRING)
+  END AS C007E,
+  
+  CASE
+    WHEN C01011 = 1 THEN 'Sim'
+    WHEN C01011 = 2 THEN 'Não'
+    WHEN C01011 = 3 THEN 'Não Sabe'
+    WHEN C01011 = 9 THEN 'Ignorado'
+    ELSE CAST(C01011 AS STRING)
+  END AS C01011,
+  
+  CASE
+    WHEN C012 = 1 THEN 'Sim'
+    WHEN C012 = 2 THEN 'Não'
+    WHEN C012 = 3 THEN 'Não Sabe'
+    WHEN C012 = 9 THEN 'Ignorado'
+    ELSE CAST(C012 AS STRING)
+  END AS C012,
+  
+  CASE
+    WHEN C013 = 1 THEN 'Sim'
+    WHEN C013 = 2 THEN 'Não'
+    WHEN C013 = 3 THEN 'Não Sabe'
+    WHEN C013 = 9 THEN 'Ignorado'
+    ELSE CAST(C013 AS STRING)
+  END AS C013,
+  
+  CASE
+    WHEN D0051 = 1 THEN 'Sim'
+    WHEN D0051 = 2 THEN 'Não'
+    WHEN D0051 = 3 THEN 'Não Sabe'
+    WHEN D0051 = 9 THEN 'Ignorado'
+    ELSE CAST(D0051 AS STRING)
+  END AS D0051
+FROM `techchallengemodulo3.resolucao01.resolucao01tabelalimpav01`
+
+
+
+v1022 AS Rural_urbano
+  A002 AS Idade
+  A003 AS Sexo
+  A005 AS Escolaridade
+  B0011 AS sintoma_febre
+  B0012 AS sintoma_tosse
+  B0013 AS sintoma_garganta
+  B0014 AS sintoma_respirar
+  B0015 AS sintoma_cabeca
+  B0018 AS sintoma_nariz
+  B0019 AS sintoma_fadiga
+  B00111 AS sintoma_cheiro
+  B002 AS visitahospital
+  B0031 AS ficouemcasa
+  B005 AS internado
+  B006 AS entubado_ventilador
+  B007 AS planosaude
+  C001 AS trabalha
+  C007D AS atividade_empresa
+  C007E AS empresa_num_empregados
+  C01011 AS renda
+  C012 AS presencial
+  C013 AS homeoffice
+  D0051 AS auxilioemergencial
